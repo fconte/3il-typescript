@@ -1,6 +1,10 @@
-<html>
+<html lang="fr">
 
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#2d3436">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -12,6 +16,11 @@
 
         .badge {
             cursor: pointer;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            font-size: 20px;
+            padding: 0;
         }
 
         .container {
@@ -25,26 +34,33 @@
         body {
             background: #2d3436;
         }
+
+        .text-muted {
+            color: #D2D2D2 !important;
+        }
+
+        .bg-light {
+            opacity: 0.9;
+
+        }
     </style>
 
 </head>
 
 <body>
     <div class="container">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Todo list</h5>
-                <div class="input-group mb-3">
-                    <input id="todoInput" type="text" class="form-control" placeholder="Quelque chose à faire .."
-                        aria-label="Recipient's username" aria-describedby="addTodoButton">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button" id="addTodoButton">Ajouter</button>
-                    </div>
-                </div>
-
-                <ul id="list" class="list-group"></ul>
+        <br />
+        <h2 class="text-white">Todo list</h2>
+        <br />
+        <div class="input-group mb-3">
+            <input id="todoInput" type="text" class="form-control" placeholder="Quelque chose à faire .."
+                aria-label="Recipient's username" aria-describedby="addTodoButton">
+            <div class="input-group-append">
+                <button class="btn btn-info" type="button" id="addTodoButton">Ajouter</button>
             </div>
         </div>
+
+        <ul id="list" class="list-group"></ul>
 
     </div>
 

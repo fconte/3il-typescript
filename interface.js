@@ -1,10 +1,31 @@
-
-
 var list = new TodoList();
-list.addTodo('Acheter du pain');
-list.addTodo('Vendre la voiture');
+// Hydrate les todos
+var cache = JSON.parse(window.localStorage.getItem('todos'));
+if (Array.isArray(cache)) {
+    list.todos = cache;
+}
 drawList();
-
+document.getElementById('todoInput').onkeyup = function (e) {
+    if (e.keyCode == 13) {
+        var val = this.value;
+        if (val != "") {
+            // On ajoute le contenu à la todolist
+            list.addTodo(this.value);
+            // On vide le champs texte
+            this.value = "";
+            // On rafraichit la liste affichée
+            drawList();
+            storeInLocalStorage();
+        }
+    }
+};
+// Stocke les données dans le local storage
+function storeInLocalStorage() {
+    // Vide le local storage
+    window.localStorage.clear();
+    // Store les todos
+    window.localStorage.setItem('todos', JSON.stringify(list.todos));
+}
 // Affiche la liste de todos
 function drawList() {
     // On sélectionne la liste ul
@@ -23,17 +44,12 @@ function drawList() {
         var actionsSpan = document.createElement('span');
         // Si la todo est faite, on attribut à l'élément la classe 'isdone'
         if (todo.state == State.Done) {
-            li.setAttribute('class', 'list-group-item d-flex justify-content-between align-items-center text-muted isdone');
+            li.setAttribute('class', 'list-group-item d-flex bg-light justify-content-between align-items-center text-muted isdone');
         }
         else {
-            // Sinon on ajoute le bouton pour marquer la todo comme effectuée
-            var doneButton = document.createElement('span');
-            doneButton.textContent = "Done";
-            doneButton.setAttribute('class', 'badge badge-info badge-pill done');
-            doneButton.setAttribute('data-id', todo.id.toString());
-            actionsSpan.appendChild(doneButton);
-            actionsSpan.appendChild(document.createTextNode(' '));
+            li.setAttribute('class', 'list-group-item d-flex justify-content-between align-items-center done');
         }
+        li.setAttribute('data-id', todo.id.toString());
         // On crée un Bouton de suppression
         var removeButton = document.createElement('span');
         removeButton.textContent = "X";
@@ -55,12 +71,15 @@ document.addEventListener('click', function (event) {
     if (target.matches('#addTodoButton')) {
         // On récupère le champs texte
         var input = document.getElementById('todoInput');
-        // On ajoute le contenu à la todolist
-        list.addTodo(input.value);
-        // On vide le champs texte
-        input.value = "";
-        // On rafraichit la liste affichée
-        drawList();
+        if (input.value != "") {
+            // On ajoute le contenu à la todolist
+            list.addTodo(input.value);
+            // On vide le champs texte
+            input.value = "";
+            // On rafraichit la liste affichée
+            drawList();
+            storeInLocalStorage();
+        }
     }
     // Si l'élement cliqué est le bouton "Supprimer"
     if (target.matches('.remove')) {
@@ -70,14 +89,16 @@ document.addEventListener('click', function (event) {
         list.removeTodo(parseInt(id, 10));
         // On rafraichit la liste affichée
         drawList();
+        storeInLocalStorage();
     }
-    // Si l'élement cliqué est le bouton "C'est fait!"
-    if (target.matches('.done')) {
+    // Si l'élement cliqué est la tache
+    if (target.matches('li')) {
         // On récupère l'identifiant de la todo courante
         var id = target.getAttribute('data-id');
-        // On demande le fermeture de cet id de todo à la liste
-        list.closeTodo(parseInt(id, 10));
+        // On demande le changement d'état de cet id de todo à la liste
+        list.switchStateOfTodo(parseInt(id, 10));
         // On rafraichit la liste affichée
         drawList();
+        storeInLocalStorage();
     }
 }, false);

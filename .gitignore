@@ -2,3 +2,8 @@ script.js
 script.ts
 solution.ts
 solution.js
+.firebase/
+.firebaserc
+404.html
+*.ts
+firebase.json
