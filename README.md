@@ -1,7 +1,9 @@
 Exercice Typescript
 ===
 
-![alt text](https://github.com/fconte/3il-typescript/blob/master/cover.png?raw=true)
+![alt text](https://github.com/fconte/3il-typescript/raw/master/cover.png)
+
+![alt text](https://yuml.me/diagram/borring/class/[Todo%7Cid:number;title:string;state:State%7C]1-*%3E[TodoList%7Ctodos:Tableau%20de%20Todo%7CaddTodo(title:string);switchStateOfTodo(id:number);removeTodo(id:number)],[State%20(Enum)%7CDone;Todo])
 
 Initialisation
 ---
@@ -32,3 +34,6 @@ La classe TodoList gère un tableau de todo. Il est possible d'ajouter, changer 
 2. Implémenter les trois méthodes publiques définies dans le schéma
 
 
+Après cela, l'application doit fonctionner!
+
+Bonus: Créer un compte sur firebase, installer la CLI firebase et déployer l'application.
