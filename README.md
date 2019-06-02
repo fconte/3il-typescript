@@ -26,7 +26,7 @@ Interface Todo
 
 Classe TodoList
 ---
-La classe TodoList gère un tableau de todo. Il est possible d'ajouter, fermer et supprimer une todo.
+La classe TodoList gère un tableau de todo. Il est possible d'ajouter, changer l'état et supprimer une todo.
 
 1. Dans le fichier ```script.ts``` créer la classe TodoList
 2. Implémenter les trois méthodes publiques définies dans le schéma
